@@ -1,0 +1,17 @@
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server--> browser: HTML code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server--> main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+ notes over browser:
+browser starts executing js-cose to request JSON data from server
+end note
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{content: "..."},...]
+ notes over browser:
+text input
+add button is clicked
+browser executes event handler that causes input to be taken
+browser adds input value to the display
+end note
