@@ -1,17 +1,33 @@
+interface BmiParams{
+    height: number,
+    weight: number
+}
 
-const calculateBmi =(weight: number, height: number): string=>{
-    let bmi = weight/Math.pow((height/100),2)
+export const parseBmiParameters=( 
+    height: number,
+    weight: number
+    ): BmiParams =>{
+        if( isNaN(height) || isNaN(weight)){
+            throw new Error('Parameters provided were not numbers')
+        }else{
+            return{
+                height: height,
+                weight: weight
+            }
+        }
+    }
+
+export const calculateBmi =(height: number,weight: number): string=>{
+    let bmi = (weight/Math.pow((height),2))*10000
+
     if(bmi < 18.5){
-        return `Your BMI is ${bmi} and you are Underweight`
+        return `Underweight`
     }else if (bmi < 25){
-        return `Your BMI is ${bmi} and you are Healthy`
+        return `Normal (healthy weight)`
     }else if (bmi < 30){
-        return `Your BMI is ${bmi} and you are Overweight`
+        return `Overweight`
     }else {
-        return `Your BMI is ${bmi} and you are Obese`
+        return `Obese`
     }
 }
 
-const weight = Number(process.argv[2]);
-const height = Number(process.argv[3])
-console.log(calculateBmi(weight, height))
