@@ -4,6 +4,8 @@ interface InitialValues{
 }
 
 const parseArguments = ( dailyHours: Array<number>, target: number): InitialValues=>{
+    // if(dailyHours.length < 6) throw new Error('Too little parameters');
+    // if(dailyHours.length > 6) throw new Error('Too many parameters')
     if((dailyHours.some(isNaN)) && (isNaN(target))){
         throw new Error('Some of the values provided are not numbers')
 } else{
@@ -54,6 +56,14 @@ const calculateExercises =(dailyHours: Array<number>, target: number): ExerciseA
     }
 }
 
-console.log(calculateExercises([2,5,4,6,1,2,4], 3))
+const daily = (process.argv[2]).split(',');
+console.log(daily)
+const dailyHours = daily.map((init)=> Number(init));
+const target = Number(process.argv[3]);
+console.log(target)
+
+parseArguments(dailyHours, target)?
+console.log(calculateExercises(dailyHours, target)): 
+new Error('Not happening');
 
 
