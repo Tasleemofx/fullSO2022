@@ -1,0 +1,6 @@
+
+POST https://localhost:3002;
+{
+    "dailyHours": [2,3,4,0,2,5,7],
+    "target": 5
+}

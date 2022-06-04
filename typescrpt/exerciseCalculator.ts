@@ -3,18 +3,18 @@ interface InitialValues{
     target: number
 }
 
-const parseArguments = ( dailyHours: Array<number>, target: number): InitialValues=>{
+export const parseArguments = ( dailyHours: Array<number>, target: number): InitialValues=>{
     // if(dailyHours.length < 6) throw new Error('Too little parameters');
     // if(dailyHours.length > 6) throw new Error('Too many parameters')
     if((dailyHours.some(isNaN)) && (isNaN(target))){
-        throw new Error('Some of the values provided are not numbers')
+        throw new Error('Some of the values provided are not numbers');
 } else{
     return {
         dailyHours: dailyHours,
         target: target
-    }
+    };
 }
-}
+};
 
 interface ExerciseAverage{
     periodLength: number;
@@ -26,24 +26,24 @@ interface ExerciseAverage{
     average: number;
 }
 
-const calculateExercises =(dailyHours: Array<number>, target: number): ExerciseAverage=>{
-    let periodLength = dailyHours.length;
-    let trainingDays = dailyHours.filter((v)=> v > 0).length;
-    let total = dailyHours.reduce((day, next)=>day + next)
-    let average = Math.ceil(total / periodLength);
-    let success = average > target? true: false;
+export const calculateExercises =(dailyHours: Array<number>, target: number): ExerciseAverage=>{
+    const periodLength = dailyHours.length;
+    const trainingDays = dailyHours.filter((v)=> v > 0).length;
+    const total = dailyHours.reduce((day, next)=>day + next);
+    const average = Math.ceil(total / periodLength);
+    const success = average > target? true: false;
     let rating;
     let ratingDescription;
 
     if ( average > target){
         rating = 1;
-        ratingDescription = "Good job, keep it up"
+        ratingDescription = "Good job, keep it up";
     } else if( average == target){
         rating = 2;
-        ratingDescription = "Not too bad but you could be better"
+        ratingDescription = "Not too bad but you could be better";
     } else{
         rating = 3;
-        ratingDescription = "Not good enough, Do better next week"
+        ratingDescription = "Not good enough, Do better next week";
     }
     return {
         periodLength: periodLength,
@@ -53,17 +53,17 @@ const calculateExercises =(dailyHours: Array<number>, target: number): ExerciseA
         ratingDescription: ratingDescription,
         target: target,
         average: average,
-    }
-}
+    };
+};
 
-const daily = (process.argv[2]).split(',');
-console.log(daily)
-const dailyHours = daily.map((init)=> Number(init));
-const target = Number(process.argv[3]);
-console.log(target)
+// const daily = (process.argv[2]).split(',');
+// console.log(daily);
+// const dailyHours = daily.map((init)=> Number(init));
+// const target = Number(process.argv[3]);
+// console.log(target);
 
-parseArguments(dailyHours, target)?
-console.log(calculateExercises(dailyHours, target)): 
-new Error('Not happening');
+// parseArguments(dailyHours, target)?
+// console.log(calculateExercises(dailyHours, target)): 
+// new Error('Not happening');
 
 
